@@ -1,0 +1,107 @@
+# 数据源配置
+spring:
+    datasource:
+        dynamic:
+            primary: primary
+            datasource:
+                ##########################################################
+                ################### primary datasource ###################
+                ##########################################################
+                primary:
+                    driver-class-name: com.mysql.cj.jdbc.Driver
+                    url: jdbc:mysql://10.48.186.59:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                    username: root
+                    password: Chat%2023
+                slave:
+                    driver-class-name: oracle.jdbc.OracleDriver
+                    url: jdbc:oracle:thin:@(DESCRIPTION =
+                        (ADDRESS_LIST =
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.44.148.9)(PORT = 1521))
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.44.148.10)(PORT = 1521))
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.44.148.11)(PORT = 1521))
+                        (FAILOVER = ON)
+                        (LOAD_BALANCE = ON)
+                        )
+                        (CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = nsn_flowdb))
+                        (FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=180)(DELAY=5))
+                        )
+                    username: sjy_user
+                    password: sjy_user2023
+               # 数据淘
+                sjt:
+                    url: jdbc:oracle:thin:@(DESCRIPTION =
+                        (ADDRESS_LIST =
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.44.27.12)(PORT = 1521))
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.44.27.13)(PORT = 1521))
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.44.27.14)(PORT = 1521))
+                        )
+                        (CONNECT_DATA =(SERVICE_NAME = wy_dx_nopmddb_pri))
+                        (FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=180)(DELAY=5))
+                        )
+                    username: user_design
+                    password: orl$di17423
+                    driver-class-name: oracle.jdbc.driver.OracleDriver
+                sjt2:
+                    url: jdbc:oracle:thin:@(DESCRIPTION =
+                        (ADDRESS_LIST =
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.48.147.156)(PORT = 1521))
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.48.147.157)(PORT = 1521))
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.48.147.158)(PORT = 1521))
+                        )
+                        (CONNECT_DATA =(SERVICE_NAME = GH_pri))
+                        (FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=180)(DELAY=5))
+                        )
+                    username: user_design
+                    password: orl$di17423
+                    driver-class-name: oracle.jdbc.driver.OracleDriver
+                # 达梦
+                dm:
+                    driver-class-name: dm.jdbc.driver.DmDriver
+                    url: jdbc:dm://10.44.179.52:5236/SJY_DMDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=true&characterEncoding=UTF-8
+                    username: SJY_USER
+                    password: sjy!@#QWE
+                #亿阳
+                yiyang:
+                    url: jdbc:oracle:thin:@(DESCRIPTION =
+                        (ADDRESS_LIST =
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.210.7.35)(PORT = 1535))
+                        )
+                        (CONNECT_DATA = (SID = EOMS4DB)(SERVER = DEDICATED))
+                        (FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=180)(DELAY=5))
+                        )
+                    username: eomsuser_interface
+                    password: Jinian_505db
+                    driver-class-name: oracle.jdbc.driver.OracleDriver
+                #诺基亚
+                nokiya:
+                    url: jdbc:oracle:thin:@(DESCRIPTION =
+                        (ADDRESS_LIST =
+                        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.44.148.9)(PORT = 1521))
+                        )
+                        (CONNECT_DATA = (SID = EOMS4DB)(SERVER = pdb_pmsdb2_pri))
+                        (FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=180)(DELAY=5))
+                        )
+                    username: user_sjy
+                    password: user_sjy2023
+                    driver-class-name: oracle.jdbc.driver.OracleDriver
+    redis:
+        # 地址
+        host: 10.48.186.59
+        # 端口，默认为6379
+        port: 6379
+        # 数据库索引
+        database: 0
+        # 密码
+        password: Sjy2024#User@#
+        # 连接超时时间
+        timeout: 10s
+        lettuce:
+            pool:
+                # 连接池中的最小空闲连接
+                min-idle: 0
+                # 连接池中的最大空闲连接
+                max-idle: 8
+                # 连接池的最大数据库连接数
+                max-active: 8
+                # #连接池最大阻塞等待时间（使用负值表示没有限制）
+                max-wait: -1ms
