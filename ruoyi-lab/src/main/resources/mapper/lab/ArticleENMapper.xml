@@ -7,19 +7,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="ArticleEN" id="ArticleENResult">
         <result property="id"    column="id"    />
         <result property="title"    column="title"    />
-        <result property="desc"    column="`desc`"    />
+        <result property="description"    column="description"    />
         <result property="content"    column="content"    />
     </resultMap>
 
     <sql id="selectArticleENVo">
-        select id, title, `desc`, content from articleEN
+        select id, title, description, content from articleEN
     </sql>
 
     <select id="selectArticleENList" parameterType="ArticleEN" resultMap="ArticleENResult">
         <include refid="selectArticleENVo"/>
         <where>  
             <if test="title != null  and title != ''"> and title = #{title}</if>
-            <if test="desc != null  and desc != ''"> and `desc` = #{desc}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
             <if test="content != null  and content != ''"> and content = #{content}</if>
         </where>
     </select>
@@ -33,12 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into articleEN
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="title != null">title,</if>
-            <if test="desc != null">`desc`,</if>
+            <if test="description != null">description,</if>
             <if test="content != null">content,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="title != null">#{title},</if>
-            <if test="desc != null">#{desc},</if>
+            <if test="description != null">#{description},</if>
             <if test="content != null">#{content},</if>
          </trim>
     </insert>
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update articleEN
         <trim prefix="SET" suffixOverrides=",">
             <if test="title != null">title = #{title},</if>
-            <if test="desc != null">`desc` = #{desc},</if>
+            <if test="description != null">description = #{description},</if>
             <if test="content != null">content = #{content},</if>
         </trim>
         where id = #{id}

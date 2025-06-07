@@ -24,11 +24,11 @@ public class Talents extends BaseEntity
 
     /** 描述 */
     @Excel(name = "描述")
-    private String desc;
+    private String description;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String creteDate;
+    /** 日期 */
+    @Excel(name = "日期")
+    private String createDate;
 
     public void setId(Long id) 
     {
@@ -39,6 +39,7 @@ public class Talents extends BaseEntity
     {
         return id;
     }
+
     public void setTitle(String title) 
     {
         this.title = title;
@@ -48,23 +49,25 @@ public class Talents extends BaseEntity
     {
         return title;
     }
-    public void setDesc(String desc) 
+
+    public void setDescription(String description) 
     {
-        this.desc = desc;
+        this.description = description;
     }
 
-    public String getDesc() 
+    public String getDescription() 
     {
-        return desc;
-    }
-    public void setCreteDate(String creteDate) 
-    {
-        this.creteDate = creteDate;
+        return description;
     }
 
-    public String getCreteDate() 
+    public void setCreateDate(String createDate) 
     {
-        return creteDate;
+        this.createDate = createDate;
+    }
+
+    public String getCreateDate() 
+    {
+        return createDate;
     }
 
     @Override
@@ -72,8 +75,8 @@ public class Talents extends BaseEntity
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("title", getTitle())
-            .append("desc", getDesc())
-            .append("creteDate", getCreteDate())
+            .append("description", getDescription())
+            .append("createDate", getCreateDate())
             .toString();
     }
 }

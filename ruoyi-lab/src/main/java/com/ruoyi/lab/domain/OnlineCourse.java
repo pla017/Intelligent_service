@@ -32,7 +32,7 @@ public class OnlineCourse extends BaseEntity
 
     /** 描述 */
     @Excel(name = "描述")
-    private String desc;
+    private String description;
 
     /** 作者 */
     @Excel(name = "作者")
@@ -74,14 +74,14 @@ public class OnlineCourse extends BaseEntity
     {
         return title;
     }
-    public void setDesc(String desc) 
+    public void setDescription(String description) 
     {
-        this.desc = desc;
+        this.description = description;
     }
 
-    public String getDesc() 
+    public String getDescription() 
     {
-        return desc;
+        return description;
     }
     public void setAuthor(String author) 
     {
@@ -100,7 +100,7 @@ public class OnlineCourse extends BaseEntity
             .append("img", getImg())
             .append("url", getUrl())
             .append("title", getTitle())
-            .append("desc", getDesc())
+            .append("description", getDescription())
             .append("author", getAuthor())
             .toString();
     }

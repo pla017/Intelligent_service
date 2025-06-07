@@ -7,20 +7,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="Talents" id="TalentsResult">
         <result property="id"    column="id"    />
         <result property="title"    column="title"    />
-        <result property="desc"    column="`desc`"    />
-        <result property="creteDate"    column="creteDate"    />
+        <result property="description"    column="description"    />
+        <result property="createDate"    column="createDate"    />
     </resultMap>
 
     <sql id="selectTalentsVo">
-        select id, title, `desc`, creteDate from talents
+        select id, title, description, createDate from talents
     </sql>
 
     <select id="selectTalentsList" parameterType="Talents" resultMap="TalentsResult">
         <include refid="selectTalentsVo"/>
         <where>  
             <if test="title != null  and title != ''"> and title = #{title}</if>
-            <if test="desc != null  and desc != ''"> and `desc` = #{desc}</if>
-            <if test="creteDate != null  and creteDate != ''"> and creteDate = #{creteDate}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="createDate != null  and createDate != ''"> and createDate = #{createDate}</if>
         </where>
     </select>
     
@@ -33,13 +33,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into talents
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="title != null">title,</if>
-            <if test="desc != null">`desc`,</if>
-            <if test="creteDate != null">creteDate,</if>
+            <if test="description != null">description,</if>
+            <if test="createDate != null">createDate,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="title != null">#{title},</if>
-            <if test="desc != null">#{desc},</if>
-            <if test="creteDate != null">#{creteDate},</if>
+            <if test="description != null">#{description},</if>
+            <if test="createDate != null">#{createDate},</if>
          </trim>
     </insert>
 
@@ -47,8 +47,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update talents
         <trim prefix="SET" suffixOverrides=",">
             <if test="title != null">title = #{title},</if>
-            <if test="desc != null">`desc` = #{desc},</if>
-            <if test="creteDate != null">creteDate = #{creteDate},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="createDate != null">createDate = #{createDate},</if>
         </trim>
         where id = #{id}
     </update>

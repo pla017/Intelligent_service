@@ -24,7 +24,7 @@ public class ArticleEN extends BaseEntity
 
     /** 文章描述 */
     @Excel(name = "文章描述")
-    private String desc;
+    private String description;
 
     /** 具体内容 */
     @Excel(name = "具体内容")
@@ -48,14 +48,14 @@ public class ArticleEN extends BaseEntity
     {
         return title;
     }
-    public void setDesc(String desc) 
+    public void setDescription(String description) 
     {
-        this.desc = desc;
+        this.description = description;
     }
 
-    public String getDesc() 
+    public String getDescription() 
     {
-        return desc;
+        return description;
     }
     public void setContent(String content) 
     {
@@ -72,7 +72,7 @@ public class ArticleEN extends BaseEntity
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("title", getTitle())
-            .append("desc", getDesc())
+            .append("description", getDescription())
             .append("content", getContent())
             .toString();
     }

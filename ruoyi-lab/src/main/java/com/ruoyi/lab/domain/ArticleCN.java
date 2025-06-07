@@ -28,7 +28,7 @@ public class ArticleCN extends BaseEntity
 
     /** 文章描述 */
     @Excel(name = "文章描述")
-    private String desc;
+    private String description;
 
     public void setId(Long id) 
     {
@@ -57,14 +57,14 @@ public class ArticleCN extends BaseEntity
     {
         return content;
     }
-    public void setDesc(String desc) 
+    public void setDesc(String description) 
     {
-        this.desc = desc;
+        this.description = description;
     }
 
     public String getDesc() 
     {
-        return desc;
+        return description;
     }
 
     @Override

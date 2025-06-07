@@ -8,13 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="img"    column="img"    />
         <result property="title"    column="title"    />
-        <result property="desc"    column="`desc`"    />
+        <result property="description"    column="description"    />
         <result property="pDate"    column="pDate"    />
         <result property="content"    column="content"    />
     </resultMap>
 
     <sql id="selectDynimicVo">
-        select id, img, title, `desc`, pDate, content from dynimic
+        select id, img, title, description, pDate, content from dynimic
     </sql>
 
     <select id="selectDynimicList" parameterType="Dynimic" resultMap="DynimicResult">
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="img != null  and img != ''"> and img = #{img}</if>
             <if test="title != null  and title != ''"> and title = #{title}</if>
-            <if test="desc != null  and desc != ''"> and `desc` = #{desc}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
             <if test="pDate != null  and pDate != ''"> and pDate = #{pDate}</if>
             <if test="content != null  and content != ''"> and content = #{content}</if>
         </where>
@@ -38,14 +38,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="img != null">img,</if>
             <if test="title != null">title,</if>
-            <if test="desc != null">`desc`,</if>
+            <if test="description != null">description,</if>
             <if test="pDate != null">pDate,</if>
             <if test="content != null">content,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="img != null">#{img},</if>
             <if test="title != null">#{title},</if>
-            <if test="desc != null">#{desc},</if>
+            <if test="description != null">#{description},</if>
             <if test="pDate != null">#{pDate},</if>
             <if test="content != null">#{content},</if>
          </trim>
@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="img != null">img = #{img},</if>
             <if test="title != null">title = #{title},</if>
-            <if test="desc != null">`desc` = #{desc},</if>
+            <if test="description != null">description = #{description},</if>
             <if test="pDate != null">pDate = #{pDate},</if>
             <if test="content != null">content = #{content},</if>
         </trim>

@@ -28,7 +28,7 @@ public class Dynimic extends BaseEntity
 
     /** 文章描述 */
     @Excel(name = "文章描述")
-    private String desc;
+    private String description;
 
     /** 日期时间 */
     @Excel(name = "日期时间")
@@ -65,14 +65,14 @@ public class Dynimic extends BaseEntity
     {
         return title;
     }
-    public void setDesc(String desc) 
+    public void setDescription(String description) 
     {
-        this.desc = desc;
+        this.description = description;
     }
 
-    public String getDesc() 
+    public String getDescription() 
     {
-        return desc;
+        return description;
     }
     public void setpDate(String pDate) 
     {
@@ -99,7 +99,7 @@ public class Dynimic extends BaseEntity
             .append("id", getId())
             .append("img", getImg())
             .append("title", getTitle())
-            .append("desc", getDesc())
+            .append("description", getDescription())
             .append("pDate", getpDate())
             .append("content", getContent())
             .toString();
