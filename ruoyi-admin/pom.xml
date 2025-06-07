@@ -84,11 +84,6 @@
             <artifactId>ruoyi-lab</artifactId>
             <version>${ruoyi.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-progress</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

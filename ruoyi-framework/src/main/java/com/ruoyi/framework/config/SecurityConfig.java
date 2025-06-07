@@ -119,7 +119,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/demointe/**","/burst/**")
                 .permitAll()
-                .antMatchers("/api/demo")
+                .antMatchers("/tool/gen/**")
+                .permitAll()
+                .antMatchers("/lab/recordPerson/uploadAvatar")
                 .permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()

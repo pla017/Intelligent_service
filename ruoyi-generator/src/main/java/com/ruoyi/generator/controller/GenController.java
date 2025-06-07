@@ -188,7 +188,7 @@ public class GenController extends BaseController
     /**
      * 批量生成代码
      */
-    @PreAuthorize("@ss.hasPermi('tool:gen:code')")
+    // @PreAuthorize("@ss.hasPermi('tool:gen:code')")
     @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/batchGenCode")
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException

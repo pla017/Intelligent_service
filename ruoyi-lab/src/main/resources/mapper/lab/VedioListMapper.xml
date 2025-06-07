@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.lab.mapper.VedioListMapper">
+    
+    <resultMap type="VedioList" id="VedioListResult">
+        <result property="id"    column="id"    />
+        <result property="icon"    column="icon"    />
+        <result property="videoUrl"    column="videoUrl"    />
+    </resultMap>
+
+    <sql id="selectVedioListVo">
+        select id, icon, videoUrl from vedioList
+    </sql>
+
+    <select id="selectVedioListList" parameterType="VedioList" resultMap="VedioListResult">
+        <include refid="selectVedioListVo"/>
+        <where>  
+            <if test="icon != null  and icon != ''"> and icon = #{icon}</if>
+            <if test="videoUrl != null  and videoUrl != ''"> and videoUrl = #{videoUrl}</if>
+        </where>
+    </select>
+    
+    <select id="selectVedioListById" parameterType="Long" resultMap="VedioListResult">
+        <include refid="selectVedioListVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVedioList" parameterType="VedioList" useGeneratedKeys="true" keyProperty="id">
+        insert into vedioList
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="icon != null">icon,</if>
+            <if test="videoUrl != null">videoUrl,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="icon != null">#{icon},</if>
+            <if test="videoUrl != null">#{videoUrl},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVedioList" parameterType="VedioList">
+        update vedioList
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="videoUrl != null">videoUrl = #{videoUrl},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVedioListById" parameterType="Long">
+        delete from vedioList where id = #{id}
+    </delete>
+
+    <delete id="deleteVedioListByIds" parameterType="String">
+        delete from vedioList where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

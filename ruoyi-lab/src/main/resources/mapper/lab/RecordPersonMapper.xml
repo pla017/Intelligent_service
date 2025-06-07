@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.lab.mapper.RecordPersonMapper">
+    
+    <resultMap type="RecordPerson" id="RecordPersonResult">
+        <result property="pName"    column="p_name"    />
+        <result property="avatar"    column="avatar"    />
+        <result property="position"    column="position"    />
+        <result property="identity"    column="identity"    />
+        <result property="domain"    column="domain"    />
+        <result property="type"    column="type"    />
+        <result property="id"    column="id"    />
+    </resultMap>
+
+    <sql id="selectRecordPersonVo">
+        select p_name, avatar, position, identity, domain, type, id from recordPerson
+    </sql>
+
+    <select id="selectRecordPersonList" parameterType="RecordPerson" resultMap="RecordPersonResult">
+        <include refid="selectRecordPersonVo"/>
+        <where>  
+            <if test="pName != null  and pName != ''"> and p_name like concat('%', #{pName}, '%')</if>
+            <if test="avatar != null  and avatar != ''"> and avatar = #{avatar}</if>
+            <if test="position != null  and position != ''"> and position = #{position}</if>
+            <if test="identity != null  and identity != ''"> and identity = #{identity}</if>
+            <if test="domain != null  and domain != ''"> and domain = #{domain}</if>
+            <if test="type != null "> and type = #{type}</if>
+        </where>
+    </select>
+    
+    <select id="selectRecordPersonById" parameterType="Long" resultMap="RecordPersonResult">
+        <include refid="selectRecordPersonVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertRecordPerson" parameterType="RecordPerson" useGeneratedKeys="true" keyProperty="id">
+        insert into recordPerson
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pName != null">p_name,</if>
+            <if test="avatar != null">avatar,</if>
+            <if test="position != null">position,</if>
+            <if test="identity != null">identity,</if>
+            <if test="domain != null">domain,</if>
+            <if test="type != null">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pName != null">#{pName},</if>
+            <if test="avatar != null">#{avatar},</if>
+            <if test="position != null">#{position},</if>
+            <if test="identity != null">#{identity},</if>
+            <if test="domain != null">#{domain},</if>
+            <if test="type != null">#{type},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRecordPerson" parameterType="RecordPerson">
+        update recordPerson
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pName != null">p_name = #{pName},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="position != null">position = #{position},</if>
+            <if test="identity != null">identity = #{identity},</if>
+            <if test="domain != null">domain = #{domain},</if>
+            <if test="type != null">type = #{type},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRecordPersonById" parameterType="Long">
+        delete from recordPerson where id = #{id}
+    </delete>
+
+    <delete id="deleteRecordPersonByIds" parameterType="String">
+        delete from recordPerson where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

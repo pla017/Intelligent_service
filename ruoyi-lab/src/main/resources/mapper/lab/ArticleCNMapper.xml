@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.lab.mapper.ArticleCNMapper">
+    
+    <resultMap type="ArticleCN" id="ArticleCNResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="content"    column="content"    />
+        <result property="desc"    column="`desc`"    />
+    </resultMap>
+
+    <sql id="selectArticleCNVo">
+        select id, title, content, `desc` from articleCN
+    </sql>
+
+    <select id="selectArticleCNList" parameterType="ArticleCN" resultMap="ArticleCNResult">
+        <include refid="selectArticleCNVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="desc != null  and desc != ''"> and `desc` = #{desc}</if>
+        </where>
+    </select>
+    
+    <select id="selectArticleCNById" parameterType="Long" resultMap="ArticleCNResult">
+        <include refid="selectArticleCNVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertArticleCN" parameterType="ArticleCN" useGeneratedKeys="true" keyProperty="id">
+        insert into articleCN
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="desc != null">`desc`,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="desc != null">#{desc},</if>
+         </trim>
+    </insert>
+
+    <update id="updateArticleCN" parameterType="ArticleCN">
+        update articleCN
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="desc != null">`desc` = #{desc},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteArticleCNById" parameterType="Long">
+        delete from articleCN where id = #{id}
+    </delete>
+
+    <delete id="deleteArticleCNByIds" parameterType="String">
+        delete from articleCN where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

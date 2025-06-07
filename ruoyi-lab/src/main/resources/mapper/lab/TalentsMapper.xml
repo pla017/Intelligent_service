@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.lab.mapper.TalentsMapper">
+    
+    <resultMap type="Talents" id="TalentsResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="desc"    column="`desc`"    />
+        <result property="creteDate"    column="creteDate"    />
+    </resultMap>
+
+    <sql id="selectTalentsVo">
+        select id, title, `desc`, creteDate from talents
+    </sql>
+
+    <select id="selectTalentsList" parameterType="Talents" resultMap="TalentsResult">
+        <include refid="selectTalentsVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="desc != null  and desc != ''"> and `desc` = #{desc}</if>
+            <if test="creteDate != null  and creteDate != ''"> and creteDate = #{creteDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectTalentsById" parameterType="Long" resultMap="TalentsResult">
+        <include refid="selectTalentsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTalents" parameterType="Talents" useGeneratedKeys="true" keyProperty="id">
+        insert into talents
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="desc != null">`desc`,</if>
+            <if test="creteDate != null">creteDate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="desc != null">#{desc},</if>
+            <if test="creteDate != null">#{creteDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTalents" parameterType="Talents">
+        update talents
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="desc != null">`desc` = #{desc},</if>
+            <if test="creteDate != null">creteDate = #{creteDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTalentsById" parameterType="Long">
+        delete from talents where id = #{id}
+    </delete>
+
+    <delete id="deleteTalentsByIds" parameterType="String">
+        delete from talents where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

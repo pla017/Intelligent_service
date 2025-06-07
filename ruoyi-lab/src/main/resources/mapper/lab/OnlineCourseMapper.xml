@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.lab.mapper.OnlineCourseMapper">
+    
+    <resultMap type="OnlineCourse" id="OnlineCourseResult">
+        <result property="id"    column="id"    />
+        <result property="img"    column="img"    />
+        <result property="url"    column="url"    />
+        <result property="title"    column="title"    />
+        <result property="desc"    column="`desc`"    />
+        <result property="author"    column="author"    />
+    </resultMap>
+
+    <sql id="selectOnlineCourseVo">
+        select id, img, url, title, `desc`, author from onlineCourse
+    </sql>
+
+    <select id="selectOnlineCourseList" parameterType="OnlineCourse" resultMap="OnlineCourseResult">
+        <include refid="selectOnlineCourseVo"/>
+        <where>  
+            <if test="img != null  and img != ''"> and img = #{img}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="desc != null  and desc != ''"> and `desc` = #{desc}</if>
+            <if test="author != null  and author != ''"> and author = #{author}</if>
+        </where>
+    </select>
+    
+    <select id="selectOnlineCourseById" parameterType="Long" resultMap="OnlineCourseResult">
+        <include refid="selectOnlineCourseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOnlineCourse" parameterType="OnlineCourse" useGeneratedKeys="true" keyProperty="id">
+        insert into onlineCourse
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="img != null">img,</if>
+            <if test="url != null">url,</if>
+            <if test="title != null">title,</if>
+            <if test="desc != null">`desc`,</if>
+            <if test="author != null">author,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="img != null">#{img},</if>
+            <if test="url != null">#{url},</if>
+            <if test="title != null">#{title},</if>
+            <if test="desc != null">#{desc},</if>
+            <if test="author != null">#{author},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOnlineCourse" parameterType="OnlineCourse">
+        update onlineCourse
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="img != null">img = #{img},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="desc != null">`desc` = #{desc},</if>
+            <if test="author != null">author = #{author},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOnlineCourseById" parameterType="Long">
+        delete from onlineCourse where id = #{id}
+    </delete>
+
+    <delete id="deleteOnlineCourseByIds" parameterType="String">
+        delete from onlineCourse where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.lab.mapper.DynimicMapper">
+    
+    <resultMap type="Dynimic" id="DynimicResult">
+        <result property="id"    column="id"    />
+        <result property="img"    column="img"    />
+        <result property="title"    column="title"    />
+        <result property="desc"    column="`desc`"    />
+        <result property="pDate"    column="pDate"    />
+        <result property="content"    column="content"    />
+    </resultMap>
+
+    <sql id="selectDynimicVo">
+        select id, img, title, `desc`, pDate, content from dynimic
+    </sql>
+
+    <select id="selectDynimicList" parameterType="Dynimic" resultMap="DynimicResult">
+        <include refid="selectDynimicVo"/>
+        <where>  
+            <if test="img != null  and img != ''"> and img = #{img}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="desc != null  and desc != ''"> and `desc` = #{desc}</if>
+            <if test="pDate != null  and pDate != ''"> and pDate = #{pDate}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+        </where>
+    </select>
+    
+    <select id="selectDynimicById" parameterType="Long" resultMap="DynimicResult">
+        <include refid="selectDynimicVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDynimic" parameterType="Dynimic" useGeneratedKeys="true" keyProperty="id">
+        insert into dynimic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="img != null">img,</if>
+            <if test="title != null">title,</if>
+            <if test="desc != null">`desc`,</if>
+            <if test="pDate != null">pDate,</if>
+            <if test="content != null">content,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="img != null">#{img},</if>
+            <if test="title != null">#{title},</if>
+            <if test="desc != null">#{desc},</if>
+            <if test="pDate != null">#{pDate},</if>
+            <if test="content != null">#{content},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDynimic" parameterType="Dynimic">
+        update dynimic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="img != null">img = #{img},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="desc != null">`desc` = #{desc},</if>
+            <if test="pDate != null">pDate = #{pDate},</if>
+            <if test="content != null">content = #{content},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDynimicById" parameterType="Long">
+        delete from dynimic where id = #{id}
+    </delete>
+
+    <delete id="deleteDynimicByIds" parameterType="String">
+        delete from dynimic where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
