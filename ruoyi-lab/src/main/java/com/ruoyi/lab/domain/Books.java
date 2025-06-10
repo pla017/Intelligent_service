@@ -32,7 +32,7 @@ public class Books extends BaseEntity
 
     /** 描述 */
     @Excel(name = "描述")
-    private String desc;
+    private String description;
 
     public void setId(Long id) 
     {
@@ -70,14 +70,14 @@ public class Books extends BaseEntity
     {
         return author;
     }
-    public void setDesc(String desc) 
+    public void setDescription(String description) 
     {
-        this.desc = desc;
+        this.description = description;
     }
 
-    public String getDesc() 
+    public String getDescription() 
     {
-        return desc;
+        return description;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class Books extends BaseEntity
             .append("img", getImg())
             .append("title", getTitle())
             .append("author", getAuthor())
-            .append("desc", getDesc())
+            .append("description", getDescription())
             .toString();
     }
 }

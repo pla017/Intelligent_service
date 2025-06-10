@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.lab.mapper.ImgChangeMapper">
+    
+    <resultMap type="ImgChange" id="ImgChangeResult">
+        <result property="id"    column="id"    />
+        <result property="img"    column="img"    />
+        <result property="type"    column="type"    />
+    </resultMap>
+
+    <sql id="selectImgChangeVo">
+        select id, img, type from imgChange
+    </sql>
+
+    <select id="selectImgChangeList" parameterType="ImgChange" resultMap="ImgChangeResult">
+        <include refid="selectImgChangeVo"/>
+        <where>  
+            <if test="img != null  and img != ''"> and img = #{img}</if>
+            <if test="type != null "> and type = #{type}</if>
+        </where>
+    </select>
+    
+    <select id="selectImgChangeById" parameterType="Long" resultMap="ImgChangeResult">
+        <include refid="selectImgChangeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertImgChange" parameterType="ImgChange" useGeneratedKeys="true" keyProperty="id">
+        insert into imgChange
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="img != null">img,</if>
+            <if test="type != null">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="img != null">#{img},</if>
+            <if test="type != null">#{type},</if>
+         </trim>
+    </insert>
+
+    <update id="updateImgChange" parameterType="ImgChange">
+        update imgChange
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="img != null">img = #{img},</if>
+            <if test="type != null">type = #{type},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteImgChangeById" parameterType="Long">
+        delete from imgChange where id = #{id}
+    </delete>
+
+    <delete id="deleteImgChangeByIds" parameterType="String">
+        delete from imgChange where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
