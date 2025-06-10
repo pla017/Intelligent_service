@@ -80,6 +80,12 @@ public class ConcatUSController extends BaseController
         return toAjax(concatUSService.insertConcatUS(concatUS));
     }
 
+    @PostMapping("/add_contact")
+    public AjaxResult add_contact(@RequestBody ConcatUS concatUS) {
+        return toAjax(concatUSService.insertConcatUS(concatUS));
+    }
+    
+
     /**
      * 修改联系我们
      */

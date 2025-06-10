@@ -21,6 +21,9 @@ import com.ruoyi.lab.service.IRecordPersonService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.utils.file.FileUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * 人物志Controller
@@ -48,6 +51,16 @@ public class RecordPersonController extends BaseController
         List<RecordPerson> list = recordPersonService.selectRecordPersonList(recordPerson);
         return getDataTable(list);
     }
+
+
+    //  落地页 list
+    @GetMapping("/lab_list")
+    public TableDataInfo lab_list() {
+        List<RecordPerson> list = recordPersonService.selectRecordPersonList(new RecordPerson());
+        return getDataTable(list);
+    }
+    
+
 
     /**
      * 导出人物志列表
@@ -108,7 +121,6 @@ public class RecordPersonController extends BaseController
     /**
      * 上传人物头像
      */
-    @PreAuthorize("@ss.hasPermi('lab:recordPerson:edit')")
     @Log(title = "人物头像", businessType = BusinessType.UPDATE)
     @PostMapping("/uploadAvatar")
     public AjaxResult uploadAvatar(@RequestParam("file") MultipartFile file) throws IOException

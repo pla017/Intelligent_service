@@ -46,6 +46,13 @@ public class ArticleCNController extends BaseController
         return getDataTable(list);
     }
 
+    @GetMapping("/list_cn")
+    public TableDataInfo list_cn() {
+        startPage();
+        List<ArticleCN> list = articleCNService.selectArticleCNList(null);
+        return getDataTable(list);
+    }
+
     /**
      * 导出文章中文列表
      */

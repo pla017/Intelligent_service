@@ -46,6 +46,14 @@ public class ArticleENController extends BaseController
         return getDataTable(list);
     }
 
+
+    @GetMapping("/list_en")
+    public TableDataInfo list_en() {
+        startPage();
+        List<ArticleEN> list = articleENService.selectArticleENList(null);
+        return getDataTable(list);
+    }
+
     /**
      * 导出文章英文列表
      */

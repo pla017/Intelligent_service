@@ -46,6 +46,13 @@ public class TalentsController extends BaseController
         return getDataTable(list);
     }
 
+    @GetMapping("/list_talents")
+    public TableDataInfo list_talents() {
+        startPage();
+        List<Talents> list = talentsService.selectTalentsList(null);
+        return getDataTable(list);
+    }
+
     /**
      * 导出人才招募列表
      */

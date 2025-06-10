@@ -54,6 +54,13 @@ public class BooksController extends BaseController
         return getDataTable(list);
     }
 
+    @GetMapping("/list_books")
+    public TableDataInfo list_books() {
+        startPage();
+        List<Books> list = booksService.selectBooksList(null);
+        return getDataTable(list);
+    }
+
     /**
      * 导出幸福书屋列表
      */

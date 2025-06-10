@@ -54,6 +54,14 @@ public class OnlineCourseController extends BaseController
         return getDataTable(list);
     }
 
+    @GetMapping("/list_onlineCourse")
+    public TableDataInfo list_onlineCourse() {
+        startPage();
+        List<OnlineCourse> list = onlineCourseService.selectOnlineCourseList(null);
+        return getDataTable(list);
+    }
+
+
     /**
      * 导出在线课程列表
      */

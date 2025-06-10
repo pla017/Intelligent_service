@@ -46,6 +46,13 @@ public class DynimicController extends BaseController
         return getDataTable(list);
     }
 
+    @GetMapping("/list_dynimic")
+    public TableDataInfo list_dynimic() {
+        startPage();
+        List<Dynimic> list = dynimicService.selectDynimicList(null);
+        return getDataTable(list);
+    }
+
     /**
      * 导出动态列表
      */
